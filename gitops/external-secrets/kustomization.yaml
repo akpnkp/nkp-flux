@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
   - central
   - overlays/test-workspace
+  - overlays/nkp-flux-provisioned-phvwv-jjxpb
