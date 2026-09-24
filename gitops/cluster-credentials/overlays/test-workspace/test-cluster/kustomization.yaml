@@ -5,16 +5,16 @@ resources:
 patches:
   - target: {kind: ExternalSecret, name: cluster-template-pc-credentials}
     patch: |-
-      - {op: replace, path: /metadata/name, value: sales-cluster-pc-credentials}
-      - {op: replace, path: /metadata/namespace, value: sales}
-      - {op: replace, path: /spec/target/name, value: sales-cluster-pc-credentials}
+      - {op: replace, path: /metadata/name, value: test-cluster-pc-credentials}
+      - {op: replace, path: /metadata/namespace, value: test-workspace}
+      - {op: replace, path: /spec/target/name, value: test-cluster-pc-credentials}
   - target: {kind: ExternalSecret, name: cluster-template-pc-credentials-for-csi}
     patch: |-
-      - {op: replace, path: /metadata/name, value: sales-cluster-pc-credentials-for-csi}
-      - {op: replace, path: /metadata/namespace, value: sales}
-      - {op: replace, path: /spec/target/name, value: sales-cluster-pc-credentials-for-csi}
+      - {op: replace, path: /metadata/name, value: test-cluster-pc-credentials-for-csi}
+      - {op: replace, path: /metadata/namespace, value: test-workspace}
+      - {op: replace, path: /spec/target/name, value: test-cluster-pc-credentials-for-csi}
   - target: {kind: ExternalSecret, name: cluster-template-pc-credentials-for-konnector-agent}
     patch: |-
-      - {op: replace, path: /metadata/name, value: sales-cluster-pc-credentials-for-konnector-agent}
-      - {op: replace, path: /metadata/namespace, value: sales}
-      - {op: replace, path: /spec/target/name, value: sales-cluster-pc-credentials-for-konnector-agent}
+      - {op: replace, path: /metadata/name, value: test-cluster-pc-credentials-for-konnector-agent}
+      - {op: replace, path: /metadata/namespace, value: test-workspace}
+      - {op: replace, path: /spec/target/name, value: test-cluster-pc-credentials-for-konnector-agent}
