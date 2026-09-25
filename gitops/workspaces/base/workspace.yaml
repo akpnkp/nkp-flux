@@ -2,6 +2,8 @@ apiVersion: workspaces.kommander.mesosphere.io/v1alpha1
 kind: Workspace
 metadata:
   name: workspace-template
+  labels:
+    caren.nutanix.com/namespace-sync: ""
   annotations:
     kommander.mesosphere.io/description: ""
     kommander.mesosphere.io/display-name: workspace-template
