@@ -15,9 +15,11 @@ patches:
       - {op: replace, path: /spec/capiCluster/topology/variables/0/value/addons/ccm/credentials/secretRef/name, value: nkp-wlc-b-pc-credentials}
       - {op: replace, path: /spec/capiCluster/topology/variables/0/value/addons/csi/providers/nutanix/credentials/secretRef/name, value: nkp-wlc-b-pc-credentials-for-csi}
       - {op: replace, path: /spec/capiCluster/topology/variables/0/value/addons/csi/providers/nutanix/storageClassConfigs/volume/parameters/description, value: CSI StorageClass nutanix-volume for nkp-wlc-b}
+      - {op: replace, path: /spec/capiCluster/topology/variables/0/value/addons/csi/providers/nutanix/storageClassConfigs/volume/volumeBindingMode, value: Immediate}
       - {op: replace, path: /spec/capiCluster/topology/variables/0/value/addons/konnectorAgent/credentials/secretRef/name, value: nkp-wlc-b-pc-credentials-for-konnector-agent}
       - {op: replace, path: /spec/capiCluster/topology/variables/0/value/addons/serviceLoadBalancer/configuration/addressRanges/0/start, value: "${IP_START}.147"}
       - {op: replace, path: /spec/capiCluster/topology/variables/0/value/addons/serviceLoadBalancer/configuration/addressRanges/0/end, value: "${IP_START}.149"}
+      - {op: add, path: /spec/capiCluster/topology/variables/0/value/addons/serviceLoadBalancer/configuration/addressRanges/1, value: {start: "${IP_START}.152", end: "${IP_START}.152"}}
       - {op: replace, path: /spec/capiCluster/topology/variables/0/value/nutanix/controlPlaneEndpoint/host, value: "${IP_START}.146"}
       - {op: replace, path: /spec/capiCluster/topology/variables/0/value/nutanix/prismCentralEndpoint/credentials/secretRef/name, value: nkp-wlc-b-pc-credentials}
       - {op: replace, path: /spec/capiCluster/topology/workers/machineDeployments/0/variables/overrides/0/value/nutanix/machineDetails/subnets/0/name, value: secondary}
