@@ -6,3 +6,4 @@ resources:
 # - overlays/finance/finance-cluster
 # - overlays/it/it-cluster
 # - overlays/sales/sales-cluster
+- overlays/nkp-flux-provisioned/nkp-wlc-b
