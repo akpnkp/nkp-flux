@@ -23,3 +23,5 @@ patches:
       - {op: replace, path: /spec/capiCluster/topology/variables/0/value/nutanix/controlPlaneEndpoint/host, value: "${IP_START}.146"}
       - {op: replace, path: /spec/capiCluster/topology/variables/0/value/nutanix/prismCentralEndpoint/credentials/secretRef/name, value: nkp-wlc-b-pc-credentials}
       - {op: replace, path: /spec/capiCluster/topology/workers/machineDeployments/0/variables/overrides/0/value/nutanix/machineDetails/subnets/0/name, value: secondary}
+      - {op: add, path: /spec/capiCluster/topology/variables/0/value/globalImageRegistryMirror, value: {credentials: {secretRef: {name: harbor-registry-credentials}}, url: "https://${IP_START}.51:5000/nkpbundle"}}
+      - {op: add, path: /spec/capiCluster/topology/variables/0/value/imageRegistries, value: [{credentials: {secretRef: {name: harbor-registry-credentials}}, url: "https://${IP_START}.51:5000"}]}
