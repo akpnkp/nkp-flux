@@ -11,6 +11,7 @@ patches:
     patch: |-
       - {op: replace, path: /metadata/name, value: nkp-wlc-a}
       - {op: replace, path: /metadata/namespace, value: nkp-flux-provisioned-phvwv-jjxpb}
+      - {op: add, path: /metadata/annotations, value: {clusters.nkp.nutanix.com/adopted-capi-cluster: "", clusters.nkp.nutanix.com/adopted-kommander-cluster: ""}}
       - {op: replace, path: /metadata/labels/konvoy.d2iq.io~1cluster-name, value: nkp-wlc-a}
       - {op: add, path: /metadata/labels/app, value: agent}
       - {op: add, path: /metadata/labels/deployer, value: ericm}
