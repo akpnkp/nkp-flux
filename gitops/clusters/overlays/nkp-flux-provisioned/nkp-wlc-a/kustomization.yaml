@@ -1,0 +1,46 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../../../base
+patches:
+  - target:
+      group: clusters.nkp.nutanix.com
+      version: v1alpha1
+      kind: NKPCluster
+      name: cluster-template
+    patch: |-
+      - {op: replace, path: /metadata/name, value: nkp-wlc-a}
+      - {op: replace, path: /metadata/namespace, value: nkp-flux-provisioned-phvwv-jjxpb}
+      - {op: add, path: /metadata/annotations, value: {clusters.nkp.nutanix.com/adopted-capi-cluster: "", clusters.nkp.nutanix.com/adopted-kommander-cluster: ""}}
+      - {op: replace, path: /metadata/labels/konvoy.d2iq.io~1cluster-name, value: nkp-wlc-a}
+      - {op: add, path: /metadata/labels/app, value: agent}
+      - {op: add, path: /metadata/labels/deployer, value: ericm}
+      - {op: add, path: /metadata/labels/sockshop, value: "true"}
+      - {op: replace, path: /spec/capiCluster/topology/variables/0/value/addons/ccm/credentials/secretRef/name, value: nkp-wlc-a-pc-credentials}
+      - {op: replace, path: /spec/capiCluster/topology/variables/0/value/addons/csi/providers/nutanix/credentials/secretRef/name, value: nkp-wlc-a-pc-credentials-for-csi}
+      - {op: replace, path: /spec/capiCluster/topology/variables/0/value/addons/csi/providers/nutanix/storageClassConfigs/volume/parameters/description, value: CSI StorageClass nutanix-volume for nkp-wlc-a}
+      - {op: replace, path: /spec/capiCluster/topology/variables/0/value/addons/csi/providers/nutanix/storageClassConfigs/volume/parameters/storageContainer, value: default}
+      - {op: replace, path: /spec/capiCluster/topology/variables/0/value/addons/csi/providers/nutanix/storageClassConfigs/volume/volumeBindingMode, value: Immediate}
+      - {op: replace, path: /spec/capiCluster/topology/variables/0/value/addons/konnectorAgent/credentials/secretRef/name, value: nkp-wlc-a-pc-credentials-for-konnector-agent}
+      - {op: replace, path: /spec/capiCluster/topology/variables/0/value/nutanix/prismCentralEndpoint/credentials/secretRef/name, value: nkp-wlc-a-pc-credentials}
+      - {op: replace, path: /spec/capiCluster/topology/variables/0/value/addons/serviceLoadBalancer/configuration/addressRanges/0/start, value: "${IP_START}.141"}
+      - {op: replace, path: /spec/capiCluster/topology/variables/0/value/addons/serviceLoadBalancer/configuration/addressRanges/0/end, value: "${IP_START}.145"}
+      - {op: add, path: /spec/capiCluster/topology/variables/0/value/addons/serviceLoadBalancer/configuration/addressRanges/1, value: {start: "${IP_START}.153", end: "${IP_START}.153"}}
+      - {op: add, path: /spec/capiCluster/topology/variables/0/value/globalImageRegistryMirror, value: {credentials: {secretRef: {name: harbor-registry-credentials}}, url: "https://${IP_START}.51:5000/nkpbundle"}}
+      - {op: add, path: /spec/capiCluster/topology/variables/0/value/imageRegistries, value: [{credentials: {secretRef: {name: harbor-registry-credentials}}, url: "https://${IP_START}.51:5000"}]}
+      - {op: add, path: /spec/capiCluster/topology/variables/0/value/users, value: [{name: konvoy, sshAuthorizedKeys: ["${SSH_PUBLIC_KEY}"], sudo: "ALL=(ALL) NOPASSWD:ALL"}]}
+      - {op: replace, path: /spec/capiCluster/topology/variables/0/value/nutanix/controlPlaneEndpoint/host, value: "${IP_START}.140"}
+      - {op: add, path: /spec/capiCluster/topology/variables/0/value/users, value: [{name: konvoy, sshAuthorizedKeys: ["${SSH_PUBLIC_KEY}"], sudo: "ALL=(ALL) NOPASSWD:ALL"}]}
+      - {op: replace, path: /spec/capiCluster/topology/workers/machineDeployments/0/variables/overrides/0/value/nutanix/machineDetails/subnets/0/name, value: secondary}
+
+      - {op: replace, path: /spec/capiCluster/topology/workers/machineDeployments/0/metadata/annotations/cluster.x-k8s.io~1cluster-api-autoscaler-node-group-max-size, value: "8"}
+      - {op: replace, path: /spec/capiCluster/topology/workers/machineDeployments/0/variables/overrides/0/value/nutanix/machineDetails/vcpuSockets, value: 16}
+      - {op: copy, from: /spec/capiCluster/topology/workers/machineDeployments/0, path: /spec/capiCluster/topology/workers/machineDeployments/-}
+      - {op: replace, path: /spec/capiCluster/topology/workers/machineDeployments/1/name, value: nai-endpoints}
+      - {op: replace, path: /spec/capiCluster/topology/workers/machineDeployments/1/metadata/annotations/cluster.x-k8s.io~1cluster-api-autoscaler-node-group-min-size, value: "3"}
+      - {op: replace, path: /spec/capiCluster/topology/workers/machineDeployments/1/metadata/annotations/cluster.x-k8s.io~1cluster-api-autoscaler-node-group-max-size, value: "3"}
+      - {op: add, path: /spec/capiCluster/topology/workers/machineDeployments/1/variables/overrides/0/value/nutanix/machineDetails/gpus, value: [{name: Tesla T4 compute, type: name}]}
+      - {op: replace, path: /spec/capiCluster/topology/workers/machineDeployments/1/variables/overrides/0/value/nutanix/machineDetails/memorySize, value: 24Gi}
+      - {op: replace, path: /spec/capiCluster/topology/workers/machineDeployments/1/variables/overrides/0/value/nutanix/machineDetails/systemDiskSize, value: 100Gi}
+      - {op: replace, path: /spec/capiCluster/topology/workers/machineDeployments/1/variables/overrides/0/value/nutanix/machineDetails/vcpuSockets, value: 12}
+      - {op: add, path: /spec/capiCluster/topology/workers/machineDeployments/1/variables/overrides/0/value/taints, value: [{effect: NoSchedule, key: nvidia.com/gpu}]}
