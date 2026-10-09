@@ -11,7 +11,6 @@ patches:
     patch: |-
       - {op: replace, path: /metadata/name, value: nkp-wlc-a}
       - {op: replace, path: /metadata/namespace, value: nkp-flux-provisioned-phvwv-jjxpb}
-      - {op: add, path: /metadata/annotations, value: {clusters.nkp.nutanix.com/adopted-capi-cluster: "", clusters.nkp.nutanix.com/adopted-kommander-cluster: ""}}
       - {op: replace, path: /metadata/labels/konvoy.d2iq.io~1cluster-name, value: nkp-wlc-a}
       - {op: add, path: /metadata/labels/app, value: agent}
       - {op: add, path: /metadata/labels/deployer, value: ericm}
@@ -19,7 +18,6 @@ patches:
       - {op: replace, path: /spec/capiCluster/topology/variables/0/value/addons/ccm/credentials/secretRef/name, value: nkp-wlc-a-pc-credentials}
       - {op: replace, path: /spec/capiCluster/topology/variables/0/value/addons/csi/providers/nutanix/credentials/secretRef/name, value: nkp-wlc-a-pc-credentials-for-csi}
       - {op: replace, path: /spec/capiCluster/topology/variables/0/value/addons/csi/providers/nutanix/storageClassConfigs/volume/parameters/description, value: CSI StorageClass nutanix-volume for nkp-wlc-a}
-      - {op: replace, path: /spec/capiCluster/topology/variables/0/value/addons/csi/providers/nutanix/storageClassConfigs/volume/parameters/storageContainer, value: default}
       - {op: replace, path: /spec/capiCluster/topology/variables/0/value/addons/csi/providers/nutanix/storageClassConfigs/volume/volumeBindingMode, value: Immediate}
       - {op: replace, path: /spec/capiCluster/topology/variables/0/value/addons/konnectorAgent/credentials/secretRef/name, value: nkp-wlc-a-pc-credentials-for-konnector-agent}
       - {op: replace, path: /spec/capiCluster/topology/variables/0/value/nutanix/prismCentralEndpoint/credentials/secretRef/name, value: nkp-wlc-a-pc-credentials}
