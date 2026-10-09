@@ -30,7 +30,6 @@ patches:
       - {op: add, path: /spec/capiCluster/topology/variables/0/value/imageRegistries, value: [{credentials: {secretRef: {name: harbor-registry-credentials}}, url: "https://${IP_START}.51:5000"}]}
       - {op: add, path: /spec/capiCluster/topology/variables/0/value/users, value: [{name: konvoy, sshAuthorizedKeys: ["${SSH_PUBLIC_KEY}"], sudo: "ALL=(ALL) NOPASSWD:ALL"}]}
       - {op: replace, path: /spec/capiCluster/topology/variables/0/value/nutanix/controlPlaneEndpoint/host, value: "${IP_START}.140"}
-      - {op: add, path: /spec/capiCluster/topology/variables/0/value/users, value: [{name: konvoy, sshAuthorizedKeys: ["${SSH_PUBLIC_KEY}"], sudo: "ALL=(ALL) NOPASSWD:ALL"}]}
       - {op: replace, path: /spec/capiCluster/topology/workers/machineDeployments/0/variables/overrides/0/value/nutanix/machineDetails/subnets/0/name, value: secondary}
 
       - {op: replace, path: /spec/capiCluster/topology/workers/machineDeployments/0/metadata/annotations/cluster.x-k8s.io~1cluster-api-autoscaler-node-group-max-size, value: "8"}

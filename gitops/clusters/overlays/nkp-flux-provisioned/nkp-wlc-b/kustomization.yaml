@@ -17,6 +17,7 @@ patches:
       - {op: replace, path: /spec/capiCluster/topology/variables/0/value/addons/csi/providers/nutanix/storageClassConfigs/volume/parameters/description, value: CSI StorageClass nutanix-volume for nkp-wlc-b}
       - {op: replace, path: /spec/capiCluster/topology/variables/0/value/addons/csi/providers/nutanix/storageClassConfigs/volume/volumeBindingMode, value: Immediate}
       - {op: replace, path: /spec/capiCluster/topology/variables/0/value/addons/konnectorAgent/credentials/secretRef/name, value: nkp-wlc-b-pc-credentials-for-konnector-agent}
+      - {op: add, path: /spec/capiCluster/topology/variables/0/value/users, value: [{name: konvoy, sshAuthorizedKeys: ["${SSH_PUBLIC_KEY}"], sudo: "ALL=(ALL) NOPASSWD:ALL"}]}
       - {op: replace, path: /spec/capiCluster/topology/variables/0/value/addons/serviceLoadBalancer/configuration/addressRanges/0/start, value: "${IP_START}.147"}
       - {op: replace, path: /spec/capiCluster/topology/variables/0/value/addons/serviceLoadBalancer/configuration/addressRanges/0/end, value: "${IP_START}.149"}
       - {op: add, path: /spec/capiCluster/topology/variables/0/value/addons/serviceLoadBalancer/configuration/addressRanges/1, value: {start: "${IP_START}.152", end: "${IP_START}.152"}}
